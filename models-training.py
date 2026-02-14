@@ -24,6 +24,7 @@ from sklearn.metrics import confusion_matrix
 import pandas as pd
 import joblib
 import os
+import json
 
 # Load datasets
 app_df = pd.read_csv("data/Credit_card.csv")
@@ -41,6 +42,11 @@ df = pd.get_dummies(df, drop_first=True)
 X = df.drop("label", axis=1)
 y = df["label"]
 
+# Save as json
+os.makedirs("model", exist_ok=True)
+with open("model/feature_columns.json", "w") as f:
+    json.dump(list(X.columns), f)
+    
 # Split
 X_train, X_test, y_train, y_test = train_test_split(
     X, y,
@@ -232,3 +238,4 @@ joblib.dump(knn_model, "model/knn.pkl")
 joblib.dump(gnb_model, "model/naive_bayes.pkl")
 joblib.dump(rf_model, "model/random_forest.pkl")
 joblib.dump(xgb_model, "model/xgboost.pkl")
+joblib.dump(scaler, "model/scaler.pkl")
