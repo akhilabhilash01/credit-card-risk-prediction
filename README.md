@@ -25,3 +25,6 @@ The Credit Card Details dataset contains information about customers and their f
 - Random Forest       : It performs very well by reducing overfitting and capturing complex patterns in the data.
 
 - XGBoost             : provides strong predictive performance and handles complex feature interactions effectively.
+
+# Streamlit app link
+https://2025aa05727-ml-credit-risk-prediction.streamlit.app/
