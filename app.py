@@ -2,9 +2,9 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import joblib
+import json
 
 st.title("Credit Card Risk Prediction")
-st.write("Enter customer details to predict credit risk.")
 
 #Load models
 models = {
@@ -17,11 +17,15 @@ models = {
 }
 scaler = joblib.load("model/scaler.pkl")
 
+# Load features
+with open("model/feature_columns.json") as f:
+    feature_columns = json.load(f)
+    
 # Model selection
 model_choice = st.selectbox("Select Model", list(models.keys()))
 
 # Input features
-st.subheader("Enter Sample Numeric Features")
+st.subheader("Enter customer details to predict credit risk")
 
 annual_income = st.number_input("Annual Income", value=50000)
 children = st.number_input("Number of Children", value=0)
@@ -29,17 +33,35 @@ family_members = st.number_input("Family Members", value=2)
 birthday_count = st.number_input("Birthday Count", value=12000)
 employed_days = st.number_input("Employed Days", value=2000)
 
-# Create input array
-input_data = np.array([[annual_income, children, family_members, birthday_count, employed_days]])
+# Create empty row with all features
+input_dict = dict.fromkeys(feature_columns, 0)
 
-# Scale input
-if model_choice in ["Logistic Regression", "KNN", "Naive Bayes"]:
-    input_data = scaler.transform(input_data)
+# Fill input value
+if "Annual_income" in input_dict:
+    input_dict["Annual_income"] = annual_income
 
-# Predeiction
+if "CHILDREN" in input_dict:
+    input_dict["CHILDREN"] = children
+
+if "Family_Members" in input_dict:
+    input_dict["Family_Members"] = family_members
+
+if "Birthday_count" in input_dict:
+    input_dict["Birthday_count"] = birthday_count
+
+if "Employed_days" in input_dict:
+    input_dict["Employed_days"] = employed_days
+
+input_df = pd.DataFrame([input_dict])
+
+# Prediction
 if st.button("Predict"):
     model = models[model_choice]
-    prediction = model.predict(input_data)[0]
+
+    if model_choice in ["Logistic Regression", "KNN", "Naive Bayes"]:
+        input_df = scaler.transform(input_df)
+
+    prediction = model.predict(input_df)[0]
 
     if prediction == 1:
         st.error("High Credit Risk")
