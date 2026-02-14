@@ -3,6 +3,9 @@ import pandas as pd
 import numpy as np
 import joblib
 import json
+import matplotlib.pyplot as plt
+import seaborn as sns
+import os
 
 st.title("Credit Card Risk Prediction")
 
@@ -67,3 +70,24 @@ if st.button("Predict"):
         st.error("High Credit Risk")
     else:
         st.success("Low Credit Risk")
+
+# Evaluation metrics
+st.subheader("Model Evaluation Metrics")
+try:
+    metrics_df = pd.read_csv("results/comparison_table.csv")
+    st.dataframe(metrics_df)
+except:
+    st.warning("Comparison table not found. Run training script first.")
+
+# Confusion matrix
+st.subheader("Confusion Matrix")
+model_display_name = model_choice.replace(" ", "_")
+cm_path = f"results/confusion_matrices/{model_display_name}_confusion_matrix.csv"
+if os.path.exists(cm_path):
+    cm_df = pd.read_csv(cm_path, index_col=0)
+
+    fig, ax = plt.subplots()
+    sns.heatmap(cm_df, annot=True, fmt="d", cmap="Blues", ax=ax)
+    st.pyplot(fig)
+else:
+    st.warning("Confusion matrix not found for this model.")
