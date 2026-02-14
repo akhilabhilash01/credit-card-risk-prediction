@@ -2,7 +2,7 @@
 Implement multiple classification models -Build an interactive Streamlit web application to demonstrate your models.
 
 # Dataset description
-Credit card Details Binary Classification Problem.
+The Credit Card Details dataset contains information about customers and their financial and demographic attributes, along with a label indicating credit risk or repayment behavior. The dataset is commonly used for classification tasks to predict whether a customer is likely to be a good or risky credit holder.
 
 # Models used and its metrics
     Model                         Accuracy   AUC       Precision   Recall   F1       MCC
