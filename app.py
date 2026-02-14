@@ -14,7 +14,7 @@ models = {
     "Logistic Regression": joblib.load("model/logistic_regression.pkl"),
     "Decision Tree": joblib.load("model/decision_tree.pkl"),
     "KNN": joblib.load("model/knn.pkl"),
-    "Naive Bayes": joblib.load("model/naive_bayes.pkl"),
+    "Gaussian Naive Bayes": joblib.load("model/naive_bayes.pkl"),
     "Random Forest": joblib.load("model/random_forest.pkl"),
     "XGBoost": joblib.load("model/xgboost.pkl")
 }
@@ -91,3 +91,4 @@ if os.path.exists(cm_path):
     st.pyplot(fig)
 else:
     st.warning("Confusion matrix not found for this model.")
+
