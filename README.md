@@ -14,17 +14,14 @@ The Credit Card Details dataset contains information about customers and their f
     XGBoost (Ensemble)            0.9366     0.7998     0.8000     0.5455   0.6486   0.6288
 
 # Observation about model performance
-- Logistic Regression : It is biased toward the majority class and misses many positive cases. It is not suitable when detecting the minority class is important.
+Logistic Regression : It is biased toward the majority class and misses many positive cases. It is not suitable when detecting the minority class is important.
 
-- Decision Tree       : It handles nonlinear patterns better and performs reasonably well but may be prone to overfitting.
+Decision Tree       : It handles nonlinear patterns better and performs reasonably well but may be prone to overfitting.
 
-- KNN                 : It struggles with high-dimensional data and many encoded features, which reduces effectiveness.
+KNN                 : It struggles with high-dimensional data and many encoded features, which reduces effectiveness.
 
-- Naive Bayes         : It predicts many positives, leading to high recall but very poor precision. Its independence assumption does not fit this dataset well.
+Naive Bayes         : It predicts many positives, leading to high recall but very poor precision. Its independence assumption does not fit this dataset well.
 
-- Random Forest       : It performs very well by reducing overfitting and capturing complex patterns in the data.
+Random Forest       : It performs very well by reducing overfitting and capturing complex patterns in the data.
 
-- XGBoost             : provides strong predictive performance and handles complex feature interactions effectively.
-
-# Streamlit app link
-https://2025aa05727-ml-credit-risk-prediction.streamlit.app/
+XGBoost             : provides strong predictive performance and handles complex feature interactions effectively.
